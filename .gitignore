@@ -1,0 +1,38 @@
+# Python #
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# VSCode #
+.vscode/
+
+# Test Directory #
+test/
+
+# Environment Files #
+.env
+*.env
+env/
+
+# OS Generated Files #
+.DS_Store
+Thumbs.db
+
+# Logs #
+*.log
+
+# Virtual Environments #
+.venv/
+venv/
+
+# Byte-compiled Files #
+*.pyo
+*.pyd
+
+# Uvicorn #
+*.pid
+
+# Testing and documentation #
+docs/
+docs.md
