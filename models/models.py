@@ -3,20 +3,45 @@
 from pydantic import BaseModel
 from typing import List, Dict
 
-
-class SentimentRequest(BaseModel):
+# Full sentiment analysis models (abstracts away models for comprehensive documentation and api usage)
+class FullSentimentRequest(BaseModel):
     prompts: List[str]
+    __info__: str = None
 
 
-class SentimentResult(BaseModel):
+class FullSentimentResult(BaseModel):
     label: str
     score: float
+    __info__: str = None
 
 
-class SentimentResponse(BaseModel):
+class FullSentimentResponse(BaseModel):
     sequence: str
     sentiments: List[SentimentResult]
+    __info__: str = None
 
 
-class SentimentJSON(BaseModel):
-    results: List[SentimentResponse]
+# Emotion sentiment models (abstracts away models for comprehensive documentation and api usage)
+class EmotionSentimentRequest(SentimentRequest):
+    __info__: str = "Inherits from SentimentRequest parent model"
+
+
+class EmotionSentimentResult(SentimentResult):
+    __info__: str = "Inherits from SentimentResult parent model"
+
+
+class EmotionSentimentResponse(SentimentResponse):
+    __info__: str = "Inherits from SentimentResponse parent model"
+
+
+# Tonality sentiment models (abstracts away models for comprehensive documentation and api usage)
+class ToneSentimentRequest(SentimentRequest):
+    __info__: str = "Inherits from SentimentRequest parent model"
+
+
+class ToneSentimentResult(SentimentResult):
+    __info__: str = "Inherits from SentimentResult parent model"
+
+
+class ToneSentimentResponse(SentimentResponse):
+    __info__: str = "Inherits from SentimentResponse parent model"
