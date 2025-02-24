@@ -45,3 +45,29 @@ class ToneSentimentResult(SentimentResult):
 
 class ToneSentimentResponse(SentimentResponse):
     __info__: str = "Inherits from SentimentResponse parent model"
+
+
+# Speach sentiment models (abstracts away models for comprehensive documentation and api usage)
+class SpeachSentimentRequest(SentimentRequest):
+    __info__: str = "Inherits from SentimentRequest parent model"
+
+
+class SpeachSentimentResult(SentimentResult):
+    __info__: str = "Inherits from SentimentResult parent model"
+
+
+class SpeachSentimentResponse(SentimentResponse):
+    __info__: str = "Inherits from SentimentResponse parent model"
+
+
+# Speach sentiment models (abstracts away models for comprehensive documentation and api usage)
+class SpeachSentimentRequest(SentimentRequest):
+    __info__: str = "Inherits from SentimentRequest parent model"
+
+
+class SpeachSentimentResult(SentimentResult):
+    __info__: str = "Inherits from SentimentResult parent model"
+
+
+class SpeachSentimentResponse(SentimentResponse):
+    __info__: str = "Inherits from SentimentResponse parent model"

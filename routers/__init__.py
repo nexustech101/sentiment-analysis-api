@@ -1,2 +1,2 @@
 # ./routers/__init__.py
-from .routes import router
+from .routes import *
