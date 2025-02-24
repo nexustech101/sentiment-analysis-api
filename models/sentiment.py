@@ -23,7 +23,6 @@ def get_sentiment_analysis(prompts: List[str]) -> List[SentimentResponse]:
         if not isinstance(prompt, str) or not prompt.strip():
             continue
         try:
-            # Assuming classifier is already initialized
             res = classifier(prompt, candidate_labels=candidate_labels)
             
             # Create a list of SentimentResult objects
@@ -35,7 +34,7 @@ def get_sentiment_analysis(prompts: List[str]) -> List[SentimentResponse]:
             # Create a SentimentResponse object
             sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
             
-            results.append(sentiment_response)  # No need to call .dict() here
+            results.append(sentiment_response)
             
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing prompt: {str(e)}")
