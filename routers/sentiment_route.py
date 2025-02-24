@@ -7,12 +7,10 @@ from functools import lru_cache
 from fastapi import FastAPI, HTTPException, APIRouter, Response
 from utils.sentiment_utils import get_sentiments, load_sentiment_labels
 from models.models import SentimentRequest, SentimentResponse
-from models.sentiments import get_sentiments
 
 router = APIRouter(
     prefix="/v1/api"
 )
-
 
 # Route gets a sentiment class from json config and returns sentiments data to user
 @router.post("/custom_sentiment/{label_group}", response_model=List[SentimentResponse])

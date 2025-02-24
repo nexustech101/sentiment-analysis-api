@@ -3,8 +3,9 @@
 from functools import lru_cache
 from transformers import pipeline
 from fastapi import HTTPException
-from .models import *
+from models.models import *
 from typing import List
+import json
 import sys
 
 
@@ -26,6 +27,7 @@ def load_sentiment_labels():
 @lru_cache(maxsize=1)
 def get_classifier():
     try:
+        # classifier = pipeline("zero-shot-classification", model="bart-large-mnli") # Needs api key
         classifier = pipeline("zero-shot-classification")
         if not classifier:  # Extra safety check
             raise ValueError("Failed to initialize the classifier pipeline")
