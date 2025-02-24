@@ -139,8 +139,27 @@ router = APIRouter(
 )
 ```
 
+### Registered Routes
+
+```bash
+# Init FastAPI module
+app = FastAPI()
+
+# Register routes with main app router
+app.include_router(full_sentiment_route)
+app.include_router(emotion_sentiment_route)
+app.include_router(tone_sentiment_route)
+app.include_router(speech_sentiment_route)
+app.include_router(profession_sentiment_route)
+```
+
+### Swagger Docs
+
 - Swagger UI: `http://127.0.0.1:8000/docs`
 - ReDoc: `http://127.0.0.1:8000/redoc`
+
+### API Docs
+
 - Full Sentiment: `http://127.0.0.1:8000/v1/api/full_sentiment`
 - Emotion Sentiment: `http://127.0.0.1:8000/v1/api/emotion_sentiment`
 - Tone Sentiment: `http://127.0.0.1:8000/v1/api/tone_sentiment`
