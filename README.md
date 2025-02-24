@@ -91,7 +91,7 @@ Response example:
 
 ```json
 [
-	{
+  {
     "sequence": "The new AI model has been making waves in the tech industry.",
     "sentiments": [
       { "label": "technology", "score": 0.831 },
