@@ -48,7 +48,7 @@ def get_all_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentResult(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 4))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
@@ -79,7 +79,7 @@ def get_emotion_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentResult(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 4))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
@@ -113,7 +113,7 @@ def get_tone_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentResult(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 4))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
@@ -147,7 +147,7 @@ def get_speech_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentResult(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 4))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
@@ -181,7 +181,7 @@ def get_profession_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentResult(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 4))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
