@@ -131,8 +131,21 @@ Errors are logged in `error.log`. [not included in this repo]
 
 API documentation is automatically available when the server is running:
 
+### Router Prefix
+
+```bash
+router = APIRouter(
+    prefix="/v1/api"
+)
+```
+
 - Swagger UI: `http://127.0.0.1:8000/docs`
 - ReDoc: `http://127.0.0.1:8000/redoc`
+- Full Sentiment: `http://127.0.0.1:8000/v1/api/full_sentiment`
+- Emotion Sentiment: `http://127.0.0.1:8000/v1/api/emotion_sentiment`
+- Tone Sentiment: `http://127.0.0.1:8000/v1/api/tone_sentiment`
+- Speech Sentiment: `http://127.0.0.1:8000/v1/api/speech_sentiment`
+- Profession Sentiment: `http://127.0.0.1:8000/v1/api/profession_sentiment`
 
 Additional documentation can be found in the `docs/` folder.
 
@@ -140,3 +153,7 @@ Additional documentation can be found in the `docs/` folder.
 
 This project is licensed under the MIT License.
 
+## Author
+
+Charles DeFreese III
+0009-0000-7876-3276
