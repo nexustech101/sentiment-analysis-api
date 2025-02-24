@@ -10,7 +10,7 @@ router = APIRouter(
 @router.get("/test")
 async def test_route():
     try:
-        return Response({"response": "API is working!"})
+        return {"response": "API is working!"}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
