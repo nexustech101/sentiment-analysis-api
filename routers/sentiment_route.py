@@ -16,7 +16,10 @@ router = APIRouter(
 @router.post("/custom_sentiment/{label_group}", response_model=List[SentimentResponse])
 def analyze_sentiment(label_group: str, request: SentimentRequest):
     sentiment_labels = load_sentiment_labels()
-    candidate_labels = sentiment_labels.get(label_group)
+    if label_group is None:
+        candidate_labels = sentiment_labels.get("all")
+    else:
+        candidate_labels = sentiment_labels.get(label_group)
     
     if not candidate_labels:
         raise HTTPException(status_code=400, detail="Invalid label group. Further sentiment customization is underway.")
