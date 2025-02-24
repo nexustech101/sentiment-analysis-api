@@ -1,5 +1,4 @@
-# ./main.py
-
+# ./main.py (API entry point)
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from routers.sentiment_route import router as sentiment_route

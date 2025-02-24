@@ -1,5 +1,4 @@
 # ./models/sentiment.py
-
 from functools import lru_cache
 from transformers import pipeline
 from fastapi import HTTPException
@@ -8,8 +7,7 @@ from typing import List
 import json
 import sys
 
-
-# Cache sentiment labels loading
+# Caching sentiment labels for models and labels avoids repeated heavy computations — great performance optimization.
 @lru_cache(maxsize=1)
 def load_sentiment_labels():
     try:
@@ -23,7 +21,7 @@ def load_sentiment_labels():
         raise HTTPException(status_code=500, detail=f"Unexpected error loading sentiment labels: {str(e)}")
 
 
-# Cache the classifier pipeline
+# Caching classifier pipeline for models and labels avoids repeated heavy computations — great performance optimization.
 @lru_cache(maxsize=1)
 def get_classifier():
     try:
@@ -36,8 +34,8 @@ def get_classifier():
         raise RuntimeError(f"Error initializing classifier: {str(e)}")
 
 
-# Function for retrieving sentiment analysis on data passed in
-def get_sentiments(candidate_labels: List[str], prompts: List[str]) -> List[SentimentResponse]:
+# Function for retrieving sentiment analysis on data passed in (optional labels parameter in router logic)
+def get_sentiments(sentiment_labels: List[str], prompts: List[str]) -> List[SentimentResponse]:
     classifier = get_classifier()  # cache the classifier object instance
     
     if not prompts:
@@ -49,7 +47,7 @@ def get_sentiments(candidate_labels: List[str], prompts: List[str]) -> List[Sent
         if not isinstance(prompt, str) or not prompt.strip():
             continue
         try:
-            res = classifier(prompt, candidate_labels=candidate_labels)
+            res = classifier(prompt, candidate_labels=sentiment_labels)
             
             # Create a list of SentimentResult objects
             sentiments = [

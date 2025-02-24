@@ -1,6 +1,5 @@
     
 # ./routers/sentiment_route.py
-
 import json
 from typing import List
 from functools import lru_cache
@@ -13,6 +12,7 @@ router = APIRouter(
 )
 
 # Route gets a sentiment class from json config and returns sentiments data to user
+# Two routes to handle edge case where user forgets to include label_group in url
 @router.post("/sentiment/{label_group}", response_model=List[SentimentResponse])
 @router.post("/sentiment", response_model=List[SentimentResponse])
 def analyze_sentiment(request: SentimentRequest, label_group: str = None):
