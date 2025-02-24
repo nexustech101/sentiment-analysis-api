@@ -31,6 +31,46 @@ sentiment-analysis/
 |   |-- sentiment.test.py
 ```
 
+## API Architectural Diagram
+
+
+```mermaid
+flowchart TB
+    subgraph Client
+        Browser
+        API_Consumer
+    end
+
+    subgraph Backend
+        API_Gateway -->|Rate Limiting & Logging| Route_Handler
+        Route_Handler -->|Caching Layer| Redis_Cache
+        Route_Handler -->|Session Management| Session_Service
+        Route_Handler -->|Database Access| Database_Service
+        Database_Service --> SQLite3_DB
+    end
+
+    subgraph AI_Pipelines
+        Route_Handler -->|Pipeline Selection| Pipeline_Manager
+        Pipeline_Manager --> Audio_Classification
+        Pipeline_Manager --> Speech_Recognition
+        Pipeline_Manager --> Depth_Estimation
+        Pipeline_Manager --> Text_Classification
+        Pipeline_Manager --> Translation
+        Pipeline_Manager --> Image_Classification
+        Pipeline_Manager --> Object_Detection
+    end
+
+    subgraph Cloud_Infrastructure
+        EC2_Instance
+        S3_Bucket
+    end
+
+    Client -->|API Requests| API_Gateway
+    Backend -->|Deployed on| EC2_Instance
+    SQLite3_DB -->|Backups| S3_Bucket
+```
+
+
 ## Requirements
 
 - Python 3.8+
