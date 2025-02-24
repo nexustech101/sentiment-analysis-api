@@ -31,7 +31,7 @@ def analyze_sentiment(label_group: str, request: SentimentRequest):
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
     
     
-# Route gets a sentiment class from json config and returns sentiments data to user
+# Handle case where user does not provide label group
 @router.post("/custom_sentiment", response_model=List[SentimentResponse])
 def analyze_sentiment(request: SentimentRequest):
     sentiment_labels = load_sentiment_labels()
