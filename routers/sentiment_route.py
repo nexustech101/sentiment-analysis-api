@@ -1,5 +1,5 @@
     
-# ./routers/sentiment.py
+# ./routers/sentiment_route.py
 
 import json
 from typing import List
@@ -13,8 +13,8 @@ router = APIRouter(
 )
 
 # Route gets a sentiment class from json config and returns sentiments data to user
-@router.post("/custom_sentiment/{label_group}", response_model=List[SentimentResponse])
-@router.post("/custom_sentiment", response_model=List[SentimentResponse])
+@router.post("/sentiment/{label_group}", response_model=List[SentimentResponse])
+@router.post("/sentiment", response_model=List[SentimentResponse])
 def analyze_sentiment(label_group: str, request: SentimentRequest):
     sentiment_labels = load_sentiment_labels()
     candidate_labels = sentiment_labels.get(label_group) if label_group else sentiment_labels.get("all")
