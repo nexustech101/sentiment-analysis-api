@@ -159,3 +159,36 @@ def get_speach_sentiments(prompts: List[str]) -> List[SpeachSentimentResponse]:
             raise HTTPException(status_code=500, detail=f"Error processing prompt: {str(e)}")
     
     return results  # Return list of SpeachSentimentResponse objects directly
+
+
+# Function for retrieving profession sentiment analysis on data passed in
+def get_profession_sentiments(prompts: List[str]) -> List[ProfessionSentimentResponse]:
+    if not prompts:
+        raise ValueError("Prompts list cannot be empty")
+    
+    results = []
+    
+    for prompt in prompts:
+        if not isinstance(prompt, str) or not prompt.strip():
+            continue
+        try:
+            res = classifier(prompt, candidate_labels=profession_sentiment_labels)
+            
+            # Create a list of ProfessionSentimentResult objects
+            sentiments = [
+                ProfessionSentimentRequest(label=label, score=round(score, 3))
+                for label, score in zip(res['labels'], res['scores'])
+            ]
+            
+            # Print info about ProfessionSentimentRequest
+            sys.stdout(getattr(ProfessionSentimentRequest, "__info__"))
+            
+            # Create a SentimentResponse object
+            sentiment_response = ProfessionSentimentResponse(sequence=prompt, sentiments=sentiments)
+            
+            results.append(sentiment_response)
+            
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Error processing prompt: {str(e)}")
+    
+    return results  # Return list of ProfessionSentimentResponse objects directly
