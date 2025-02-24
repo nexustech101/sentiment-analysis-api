@@ -11,7 +11,7 @@ classifier = pipeline("zero-shot-classification")
 all_sentiment_labels = [
     "positive", "negative", "neutral", "politics", "education", "business",
     "technology", "sports", "joy", "anger", "sadness", "surprise", "fear",
-    "question", "statement", "command"
+    "question", "statement", "command",
 ]
 
 # Break up sentiment types into groups for more comprehensive api usages
@@ -34,6 +34,7 @@ profession_sentiment_labels = [
 
 # Function for retrieving sentiment analysis on data passed in
 def get_all_sentiments(prompts: List[str]) -> List[SentimentResponse]:
+    global all_sentiment_labels
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -64,6 +65,7 @@ def get_all_sentiments(prompts: List[str]) -> List[SentimentResponse]:
 
 # Function for retrieving emotion sentiment analysis on data passed in
 def get_emotion_sentiments(prompts: List[str]) -> List[SentimentResponse]:
+    global emotion_sentiment_labels
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -77,7 +79,7 @@ def get_emotion_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentRequest(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
@@ -85,7 +87,7 @@ def get_emotion_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             # sys.stdout(getattr(SentimentRequest, "__info__"))
             
             # Create a SentimentResponse object
-            sentiment_response = SentimentRequest(sequence=prompt, sentiments=sentiments)
+            sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
             
             results.append(sentiment_response)
             
@@ -97,6 +99,7 @@ def get_emotion_sentiments(prompts: List[str]) -> List[SentimentResponse]:
 
 # Function for retrieving tone sentiment analysis on data passed in
 def get_tone_sentiments(prompts: List[str]) -> List[SentimentResponse]:
+    global tone_sentiment_labels
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -110,7 +113,7 @@ def get_tone_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentRequest(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
@@ -130,6 +133,7 @@ def get_tone_sentiments(prompts: List[str]) -> List[SentimentResponse]:
 
 # Function for retrieving speach sentiment analysis on data passed in
 def get_speech_sentiments(prompts: List[str]) -> List[SentimentResponse]:
+    global speech_sentiment_labels
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -143,12 +147,12 @@ def get_speech_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SpeachSentimentRequest(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about SentimentRequest
-            sys.stdout(getattr(SpeachSentimentRequest, "__info__"))
+            # # Print info about SentimentRequest
+            # sys.stdout(getattr(SentimentRequest, "__info__"))
             
             # Create a SentimentResponse object
             sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
@@ -163,6 +167,7 @@ def get_speech_sentiments(prompts: List[str]) -> List[SentimentResponse]:
 
 # Function for retrieving profession sentiment analysis on data passed in
 def get_profession_sentiments(prompts: List[str]) -> List[SentimentResponse]:
+    global profession_sentiment_labels
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -176,7 +181,7 @@ def get_profession_sentiments(prompts: List[str]) -> List[SentimentResponse]:
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentRequest(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
