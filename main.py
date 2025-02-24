@@ -2,7 +2,7 @@
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
-from routers.sentiment import router as full_sentiment_route
+from routers.full_sentiment import router as full_sentiment_route
 from routers.test_route import router as test_route
 from routers.emotion_sentiment import router as emotion_sentiment_route
 from routers.tone_sentiment import router as tone_sentiment_route
