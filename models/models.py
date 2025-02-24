@@ -20,7 +20,7 @@ class FullSentimentResult(Base):
 
 class FullSentimentResponse(Base):
     sequence: str
-    sentiments: List[SentimentResult]
+    sentiments: List[FullSentimentResult]
 
 
 # Emotion sentiment models (abstracts away models for comprehensive documentation and api usage)
