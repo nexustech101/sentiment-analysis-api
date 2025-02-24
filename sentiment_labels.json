@@ -1,9 +1,9 @@
 {
   "tone": [
-      "positive", 
-      "negative", 
-      "neutral"
-    ],
+    "positive", 
+    "negative", 
+    "neutral"
+  ],
   "emotion": [
     "joy", 
     "anger", 
@@ -40,6 +40,7 @@
     "fear",
     "question",
     "statement",
-    "command"
+    "command",
+    "excited"
   ]
 }
