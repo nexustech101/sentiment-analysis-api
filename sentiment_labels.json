@@ -1,0 +1,45 @@
+{
+  "tone": [
+      "positive", 
+      "negative", 
+      "neutral"
+    ],
+  "emotion": [
+    "joy", 
+    "anger", 
+    "sadness", 
+    "surprise",
+    "excited",
+    "fear"
+  ],
+  "speech": [
+    "question", 
+    "statement", 
+    "command"
+  ],
+  "profession": [
+    "politics", 
+    "education", 
+    "business", 
+    "technology", 
+    "sports"
+  ],
+  "all": [
+    "positive",
+    "negative",
+    "neutral",
+    "politics",
+    "education",
+    "business",
+    "technology",
+    "sports",
+    "joy",
+    "anger",
+    "sadness",
+    "surprise",
+    "fear",
+    "question",
+    "statement",
+    "command"
+  ]
+}

@@ -36,3 +36,6 @@ venv/
 # Testing and documentation #
 docs/
 docs.md
+
+# Exclude code that has been repeated #
+models/sentiment.py
