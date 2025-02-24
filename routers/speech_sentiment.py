@@ -2,17 +2,17 @@
 
 from fastapi import FastAPI, HTTPException, APIRouter, Response
 from typing import List
-from models.models import SpeachSentimentRequest, SpeachSentimentResponse
-from models.sentiments import get_speach_sentiments
+from models.models import SentimentRequest, SentimentResponse
+from models.sentiments import get_speech_sentiments
 
 router = APIRouter(
     prefix="/v1/api"
 )
 
-@router.post("/speach_sentiment", response_model=List[SpeachSentimentResponse])
-def analyze_speach_sentiment(request: SpeachSentimentRequest):
+@router.post("/speech_sentiment", response_model=List[SentimentResponse])
+def analyze_speech_sentiment(request: SentimentRequest):
     try:
-        return get_speach_sentiments(request.prompts)
+        return get_speech_sentiments(request.prompts)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:

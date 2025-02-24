@@ -2,15 +2,15 @@
 
 from fastapi import FastAPI, HTTPException, APIRouter, Response
 from typing import List
-from models.models import ProfessionSentimentRequest, ProfessionSentimentResponse
+from models.models import SentimentRequest, SentimentResponse
 from models.sentiments import get_profession_sentiments
 
 router = APIRouter(
     prefix="/v1/api"
 )
 
-@router.post("/profession_sentiment", response_model=List[ProfessionSentimentResponse])
-def analyze_profession_sentiment(request: ProfessionSentimentRequest):
+@router.post("/profession_sentiment", response_model=List[SentimentResponse])
+def analyze_profession_sentiment(request: SentimentRequest):
     try:
         return get_profession_sentiments(request.prompts)
     except ValueError as e:

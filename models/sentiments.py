@@ -24,7 +24,7 @@ emotion_sentiment_labels = [
     "joy", "anger", "sadness", "surprise", "fear",
 ]
 
-speach_sentiment_labels = [
+speech_sentiment_labels = [
     "question", "statement", "command",
 ]
 
@@ -32,8 +32,8 @@ profession_sentiment_labels = [
     "politics", "education", "business", "technology", "sports",
 ]
 
-# Function for retrieving full sentiment analysis on data passed in
-def get_all_sentiments(prompts: List[str]) -> List[FullSentimentResponse]:
+# Function for retrieving sentiment analysis on data passed in
+def get_all_sentiments(prompts: List[str]) -> List[SentimentResponse]:
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -45,25 +45,25 @@ def get_all_sentiments(prompts: List[str]) -> List[FullSentimentResponse]:
         try:
             res = classifier(prompt, candidate_labels=all_sentiment_labels)
             
-            # Create a list of FullSentimentResult objects
+            # Create a list of SentimentResult objects
             sentiments = [
-                FullSentimentResult(label=label, score=round(score, 3))
+                SentimentResult(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Create a FullSentimentResponse object
-            sentiment_response = FullSentimentResponse(sequence=prompt, sentiments=sentiments)
+            # Create a SentimentResponse object
+            sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
             
             results.append(sentiment_response)
             
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing prompt: {str(e)}")
     
-    return results  # Return list of FullSentimentResponse objects directly
+    return results  # Return list of SentimentResponse objects directly
 
 
 # Function for retrieving emotion sentiment analysis on data passed in
-def get_emotion_sentiments(prompts: List[str]) -> List[EmotionSentimentResponse]:
+def get_emotion_sentiments(prompts: List[str]) -> List[SentimentResponse]:
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -75,17 +75,17 @@ def get_emotion_sentiments(prompts: List[str]) -> List[EmotionSentimentResponse]
         try:
             res = classifier(prompt, candidate_labels=emotion_sentiment_labels)
             
-            # Create a list of EmotionSentimentResult objects
+            # Create a list of SentimentResult objects
             sentiments = [
-                EmotionSentimentRequest(label=label, score=round(score, 3))
+                SentimentRequest(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about EmotionSentimentRequest
-            sys.stdout(getattr(EmotionSentimentRequest, "__info__"))
+            # Print info about SentimentRequest
+            sys.stdout(getattr(SentimentRequest, "__info__"))
             
-            # Create a EmotionSentimentResponse object
-            sentiment_response = EmotionSentimentRequest(sequence=prompt, sentiments=sentiments)
+            # Create a SentimentResponse object
+            sentiment_response = SentimentRequest(sequence=prompt, sentiments=sentiments)
             
             results.append(sentiment_response)
             
@@ -96,7 +96,7 @@ def get_emotion_sentiments(prompts: List[str]) -> List[EmotionSentimentResponse]
 
 
 # Function for retrieving tone sentiment analysis on data passed in
-def get_tone_sentiments(prompts: List[str]) -> List[ToneSentimentResponse]:
+def get_tone_sentiments(prompts: List[str]) -> List[SentimentResponse]:
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -108,28 +108,28 @@ def get_tone_sentiments(prompts: List[str]) -> List[ToneSentimentResponse]:
         try:
             res = classifier(prompt, candidate_labels=tone_sentiment_labels)
             
-            # Create a list of ToneSentimentResult objects
+            # Create a list of SentimentResult objects
             sentiments = [
-                ToneSentimentRequest(label=label, score=round(score, 3))
+                SentimentRequest(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about ToneSentimentRequest
-            sys.stdout(getattr(ToneSentimentRequest, "__info__"))
+            # Print info about SentimentRequest
+            sys.stdout(getattr(SentimentRequest, "__info__"))
             
-            # Create a ToneSentimentResponse object
-            sentiment_response = ToneSentimentResponse(sequence=prompt, sentiments=sentiments)
+            # Create a SentimentResponse object
+            sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
             
             results.append(sentiment_response)
             
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing prompt: {str(e)}")
     
-    return results  # Return list of ToneSentimentResponse objects directly
+    return results  # Return list of SentimentResponse objects directly
 
 
 # Function for retrieving speach sentiment analysis on data passed in
-def get_speach_sentiments(prompts: List[str]) -> List[SpeachSentimentResponse]:
+def get_speech_sentiments(prompts: List[str]) -> List[SentimentResponse]:
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -139,30 +139,30 @@ def get_speach_sentiments(prompts: List[str]) -> List[SpeachSentimentResponse]:
         if not isinstance(prompt, str) or not prompt.strip():
             continue
         try:
-            res = classifier(prompt, candidate_labels=speach_sentiment_labels)
+            res = classifier(prompt, candidate_labels=speech_sentiment_labels)
             
-            # Create a list of SpeachSentimentResult objects
+            # Create a list of SentimentResult objects
             sentiments = [
                 SpeachSentimentRequest(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about SpeachSentimentRequest
+            # Print info about SentimentRequest
             sys.stdout(getattr(SpeachSentimentRequest, "__info__"))
             
             # Create a SentimentResponse object
-            sentiment_response = SpeachSentimentResponse(sequence=prompt, sentiments=sentiments)
+            sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
             
             results.append(sentiment_response)
             
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing prompt: {str(e)}")
     
-    return results  # Return list of SpeachSentimentResponse objects directly
+    return results  # Return list of SentimentResponse objects directly
 
 
 # Function for retrieving profession sentiment analysis on data passed in
-def get_profession_sentiments(prompts: List[str]) -> List[ProfessionSentimentResponse]:
+def get_profession_sentiments(prompts: List[str]) -> List[SentimentResponse]:
     if not prompts:
         raise ValueError("Prompts list cannot be empty")
     
@@ -174,21 +174,21 @@ def get_profession_sentiments(prompts: List[str]) -> List[ProfessionSentimentRes
         try:
             res = classifier(prompt, candidate_labels=profession_sentiment_labels)
             
-            # Create a list of ProfessionSentimentResult objects
+            # Create a list of SentimentResult objects
             sentiments = [
-                ProfessionSentimentRequest(label=label, score=round(score, 3))
+                SentimentRequest(label=label, score=round(score, 3))
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about ProfessionSentimentRequest
-            sys.stdout(getattr(ProfessionSentimentRequest, "__info__"))
+            # Print info about SentimentRequest
+            sys.stdout(getattr(SentimentRequest, "__info__"))
             
             # Create a SentimentResponse object
-            sentiment_response = ProfessionSentimentResponse(sequence=prompt, sentiments=sentiments)
+            sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
             
             results.append(sentiment_response)
             
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error processing prompt: {str(e)}")
     
-    return results  # Return list of ProfessionSentimentResponse objects directly
+    return results  # Return list of SentimentResponse objects directly
