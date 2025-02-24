@@ -19,7 +19,12 @@ sentiment-analysis/
 |   |-- sentiment.py
 |   |-- __init__.py
 |-- routers/
-|   |-- routes.py
+|   |-- full_sentiment.py
+|   |-- emotion_sentiment.py
+|   |-- tone_sentiment.py
+|   |-- speech_sentiment.py
+|   |-- profession_sentiment.py
+|   |-- test_sentiment.py
 |   |-- __init__.py
 |-- test/
 |   |-- output.json
@@ -31,6 +36,9 @@ sentiment-analysis/
 - Python 3.8+
 - FastAPI
 - Uvicorn
+- Tensoflow
+- Pytorch
+- Transformers
 
 ## Installation
 
