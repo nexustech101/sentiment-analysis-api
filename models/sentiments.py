@@ -81,8 +81,8 @@ def get_emotion_sentiments(prompts: List[str]) -> List[SentimentResponse]:
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about SentimentRequest
-            sys.stdout(getattr(SentimentRequest, "__info__"))
+            # # Print info about SentimentRequest
+            # sys.stdout(getattr(SentimentRequest, "__info__"))
             
             # Create a SentimentResponse object
             sentiment_response = SentimentRequest(sequence=prompt, sentiments=sentiments)
@@ -114,8 +114,8 @@ def get_tone_sentiments(prompts: List[str]) -> List[SentimentResponse]:
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about SentimentRequest
-            sys.stdout(getattr(SentimentRequest, "__info__"))
+            # # Print info about SentimentRequest
+            # sys.stdout(getattr(SentimentRequest, "__info__"))
             
             # Create a SentimentResponse object
             sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
@@ -180,8 +180,8 @@ def get_profession_sentiments(prompts: List[str]) -> List[SentimentResponse]:
                 for label, score in zip(res['labels'], res['scores'])
             ]
             
-            # Print info about SentimentRequest
-            sys.stdout(getattr(SentimentRequest, "__info__"))
+            # # Print info about SentimentRequest
+            # sys.stdout(getattr(SentimentRequest, "__info__"))
             
             # Create a SentimentResponse object
             sentiment_response = SentimentResponse(sequence=prompt, sentiments=sentiments)
