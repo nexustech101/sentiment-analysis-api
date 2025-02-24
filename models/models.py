@@ -62,14 +62,14 @@ class SpeachSentimentResponse(FullSentimentResponse):
     pass
 
 
-# Speach sentiment models (abstracts away models for comprehensive documentation and api usage)
-class SpeachSentimentRequest(FullSentimentRequest):
+# Profession sentiment models (abstracts away models for comprehensive documentation and api usage)
+class ProfessionSentimentRequest(FullSentimentRequest):
     pass
 
 
-class SpeachSentimentResult(FullSentimentResult):
+class ProfessionSentimentResult(FullSentimentResult):
     pass
 
 
-class SpeachSentimentResponse(FullSentimentResponse):
+class ProfessionSentimentResponse(FullSentimentResponse):
     pass

@@ -3,7 +3,7 @@
 from fastapi import FastAPI, HTTPException, APIRouter, Response
 from typing import List
 from models.models import ToneSentimentRequest, ToneSentimentResponse
-from models.sentiment import get_tone_sentiments
+from models.sentiments import get_tone_sentiments
 
 router = APIRouter(
     prefix="/v1/api"

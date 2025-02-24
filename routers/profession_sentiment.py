@@ -3,7 +3,7 @@
 from fastapi import FastAPI, HTTPException, APIRouter, Response
 from typing import List
 from models.models import ProfessionSentimentRequest, ProfessionSentimentResponse
-from models.sentiment import get_profession_sentiments
+from models.sentiments import get_profession_sentiments
 
 router = APIRouter(
     prefix="/v1/api"
