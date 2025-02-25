@@ -8,7 +8,7 @@ logger = logging.getLogger("sentiment-analysis")
 logger.setLevel(logging.DEBUG)
 
 # File handler for rotating logs
-file_handler = RotatingFileHandler("server.log", maxBytes=5_000_000, backupCount=5)
+file_handler = RotatingFileHandler("logs/server.log", maxBytes=5_000_000, backupCount=5)
 formatter = logging.Formatter(
     "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
