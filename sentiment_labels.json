@@ -15,12 +15,13 @@
   "speech": [
     "question", 
     "statement", 
-    "command"
+    "command",
+    "query"
   ],
   "profession": [
     "politics", 
     "education", 
-    "business", 
+    "business",
     "technology", 
     "sports"
   ],
@@ -37,10 +38,11 @@
     "anger",
     "sadness",
     "surprise",
+    "excited",
     "fear",
     "question",
     "statement",
     "command",
-    "excited"
+    "query"
   ]
 }
