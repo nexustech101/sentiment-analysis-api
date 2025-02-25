@@ -51,8 +51,8 @@ def get_sentiments(sentiment_labels: List[str], prompts: List[str]) -> List[Sent
             
             # Create a list of SentimentResult objects
             sentiments = [
-                SentimentResult(label=label, score=round(score, 4))
-                for label, score in zip(res['labels'], res['scores'])
+                SentimentResult(label=label, confidence=round(confidence, 8))
+                for label, confidence in zip(res['labels'], res['scores'])
             ]
             
             # Create a SentimentResponse object

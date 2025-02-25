@@ -1,131 +1,93 @@
-# Sentiment Analysis FastAPI
+# Sentiment Analysis API
 
-This project is a simple and efficient Sentiment Analysis API built with FastAPI. It provides endpoints for analyzing the sentiment of text data, categorizing it as positive, negative, or neutral. The API is designed with scalability and modularity in mind, following production-ready practices.
+## Project Overview
+This project is a FastAPI-based sentiment analysis API. It provides endpoints for analyzing the sentiment of text inputs and is structured for scalability, modularity, and performance. The API leverages pre-labeled sentiment data and includes efficient caching, error logging, and a well-organized directory structure.
+
+## Features
+- FastAPI framework for high-performance API development
+- Modular architecture for models, routes, and utilities
+- Sentiment analysis using pre-labeled data
+- Efficient caching with `@lru_cache`
+- Structured error handling and logging
+- Pydantic models for request validation and response consistency
 
 ## Project Structure
-
-```bash
-sentiment-analysis/
-|-- .gitignore
-|-- error.log
-|-- main.py
-|-- requirements.txt
-|-- run.cmd
-|-- __init__.py
-|-- docs/
-|   |-- docs.md
-|-- models/
-|   |-- models.py
-|   |-- sentiment.py
-|   |-- __init__.py
-|-- routers/
-|   |-- full_sentiment.py
-|   |-- emotion_sentiment.py
-|   |-- tone_sentiment.py
-|   |-- speech_sentiment.py
-|   |-- profession_sentiment.py
-|   |-- test_sentiment.py
-|   |-- __init__.py
-|-- test/
-|   |-- output.json
-|   |-- sentiment.test.py
 ```
-
-## API Architectural Diagram
-
-
-```mermaid
-flowchart TB
-    subgraph Client
-        Browser
-        API_Consumer
-    end
-
-    subgraph Backend
-        API_Gateway -->|Rate Limiting & Logging| Route_Handler
-        Route_Handler -->|Caching Layer| Redis_Cache
-        Route_Handler -->|Session Management| Session_Service
-        Route_Handler -->|Database Access| Database_Service
-        Database_Service --> SQLite3_DB
-    end
-
-    subgraph AI_Pipelines
-        Route_Handler -->|Pipeline Selection| Pipeline_Manager
-        Pipeline_Manager --> Audio_Classification
-        Pipeline_Manager --> Speech_Recognition
-        Pipeline_Manager --> Depth_Estimation
-        Pipeline_Manager --> Text_Classification
-        Pipeline_Manager --> Translation
-        Pipeline_Manager --> Image_Classification
-        Pipeline_Manager --> Object_Detection
-    end
-
-    subgraph Cloud_Infrastructure
-        EC2_Instance
-        S3_Bucket
-    end
-
-    Client -->|API Requests| API_Gateway
-    Backend -->|Deployed on| EC2_Instance
-    SQLite3_DB -->|Backups| S3_Bucket
+C:.
+│   .gitignore
+│   error.log                   # Error logging file
+│   main.py                     # Entry point for the FastAPI application
+│   README.md                   # Project documentation
+│   requirements.txt            # Python dependencies
+│   run.sh                      # Shell script to run the API
+│   sentiment_labels.json       # Sentiment data
+│
+├───docs
+│       docs.md                 # Additional project documentation
+│
+├───models
+│       models.py               # Pydantic models for API data validation
+│       __init__.py             # Package initializer
+│
+├───routers
+│       sentiment_route.py      # API route for sentiment analysis
+│       __init__.py             # Package initializer
+│
+├───test
+│       output.json             # Sample test output
+│       sentiment.test.py       # Test cases for sentiment analysis
+│
+└───utils
+        sentiment_utils.py      # Utility functions for sentiment analysis
+        __init__.py             # Package initializer
 ```
-
-
-## Requirements
-
-- Python 3.8+
-- FastAPI
-- Uvicorn
-- Tensoflow
-- Pytorch
-- Transformers
 
 ## Installation
-
 1. Clone the repository:
-
 ```bash
-git clone https://github.com/nexustech101/sentiment-analysis-api.git
+git clone https://github.com/your-repo/sentiment-analysis-api.git
+```
+
+2. Navigate to the project directory:
+```bash
 cd sentiment-analysis
 ```
 
-2. Create a virtual environment (optional but recommended):
-
+3. Create a virtual environment and activate it:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Linux/Mac
+source venv/bin/activate  # For Linux/Mac
+venv\Scripts\activate     # For Windows
 ```
 
-or
-
-```bash
-python -m venv venv
-call venv/Scripts/activate  # On Windows cmd
-```
-
-3. Install dependencies:
-
+4. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Running the API
+For Windows:
+```bash
+run.cmd
+```
 
-Start the FastAPI application using Uvicorn:
+For Linux/Mac:
+```bash
+bash run.sh
+```
 
+Or run directly with Python:
 ```bash
 uvicorn main:app --reload
 ```
 
-The API will be accessible at `http://127.0.0.1:8000/v1/api/sentiment`
+API will be accessible at: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ## API Endpoints
+### `POST /sentiment`
+Analyzes the sentiment of the provided text.
 
-- **GET /** — Root endpoint, returns a welcome message.
-- **POST /sentiment** — Analyzes the sentiment of the provided text.
-- **Application-type/json** — Post data directly in the body of your request
-
-Request example:
+**Request:**
 
 ```json
 {
@@ -135,84 +97,57 @@ Request example:
 }
 ```
 
-Response example:
+**Response example:**
+
+```json
+{
+  "sentiment": "positive",
+  "confidence": 0.98
+}
+```
+##### or
 
 ```json
 [
   {
     "sequence": "The new AI model has been making waves in the tech industry.",
     "sentiments": [
-      { "label": "technology", "score": 0.831 },
-      { "label": "surprise", "score": 0.048 },
-      { "label": "statement", "score": 0.034 },
-      { "label": "question", "score": 0.029 },
-      { "label": "positive", "score": 0.014 },
-      { "label": "command", "score": 0.011 },
-      { "label": "business", "score": 0.009 },
-      { "label": "joy", "score": 0.007 },
-      { "label": "neutral", "score": 0.004 },
-      { "label": "negative", "score": 0.003 },
-      { "label": "fear", "score": 0.002 },
-      { "label": "sports", "score": 0.002 },
-      { "label": "anger", "score": 0.002 },
-      { "label": "education", "score": 0.002 },
-      { "label": "politics", "score": 0.001 },
-      { "label": "sadness", "score": 0.001 }
+      { "label": "technology", "confidence": 0.831 },
+      { "label": "surprise", "confidence": 0.048 },
+      { "label": "statement", "confidence": 0.034 },
+      { "label": "question", "confidence": 0.029 },
+      { "label": "positive", "confidence": 0.014 },
+      { "label": "command", "confidence": 0.011 },
+      { "label": "business", "confidence": 0.009 },
+      { "label": "joy", "confidence": 0.007 },
+      { "label": "neutral", "confidence": 0.004 },
+      { "label": "negative", "confidence": 0.003 },
+      { "label": "fear", "confidence": 0.002 },
+      { "label": "sports", "confidence": 0.002 },
+      { "label": "anger", "confidence": 0.002 },
+      { "label": "education", "confidence": 0.002 },
+      { "label": "politics", "confidence": 0.001 },
+      { "label": "sadness", "confidence": 0.001 }
     ]
   },
 ]
 ```
 
-## Error Logging
-
-Errors are logged in `error.log`. [not included in this repo]
-
-## Documentation
-
-API documentation is automatically available when the server is running:
-
-### Router Prefix
-
+## Testing
+Run tests with:
 ```bash
-router = APIRouter(
-    prefix="/v1/api"
-)
+pytest test/sentiment.test.py
 ```
 
-### Registered Routes
+## Logging
+Errors are logged to `error.log`.
 
-```bash
-# Init FastAPI module
-app = FastAPI()
-
-# Register routes with main app router
-app.include_router(full_sentiment_route)
-app.include_router(emotion_sentiment_route)
-app.include_router(tone_sentiment_route)
-app.include_router(speech_sentiment_route)
-app.include_router(profession_sentiment_route)
-```
-
-### Swagger Docs
-
-- Swagger UI: `http://127.0.0.1:8000/docs`
-- ReDoc: `http://127.0.0.1:8000/redoc`
-
-### API Docs
-
-- Full Sentiment: `http://127.0.0.1:8000/v1/api/full_sentiment`
-- Emotion Sentiment: `http://127.0.0.1:8000/v1/api/emotion_sentiment`
-- Tone Sentiment: `http://127.0.0.1:8000/v1/api/tone_sentiment`
-- Speech Sentiment: `http://127.0.0.1:8000/v1/api/speech_sentiment`
-- Profession Sentiment: `http://127.0.0.1:8000/v1/api/profession_sentiment`
-
-Additional documentation can be found in the `docs/` folder.
+## Contributing
+1. Fork the repo.
+2. Create a new branch.
+3. Commit your changes.
+4. Submit a pull request.
 
 ## License
-
 This project is licensed under the MIT License.
 
-## Author
-
-Charles DeFreese III
-0009-0000-7876-3276

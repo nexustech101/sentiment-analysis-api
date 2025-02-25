@@ -14,14 +14,9 @@ class SentimentRequest(BaseModel):
 
 class SentimentResult(BaseModel):
     label: str
-    score: float
+    confidence: float
 
 
 class SentimentResponse(BaseModel):
     sequence: str
     sentiments: List[SentimentResult]
-
-
-# Data class for candiate labels. This is an enum which allows us to conditionally select different label groups
-class CandidateLabels(BaseModel):
-    candidate_labels: List[str] = None
