@@ -2,7 +2,7 @@
 from functools import lru_cache
 from transformers import pipeline
 from fastapi import HTTPException
-from models.models import *
+from models.sentiment import *
 from utils.logger import log_debug, log_info, log_error
 from typing import List
 import json
