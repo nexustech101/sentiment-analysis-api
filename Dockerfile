@@ -1,1 +1,2 @@
-# @TODO: Implement docker config below
+FROM ubuntu
+
