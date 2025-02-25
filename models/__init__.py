@@ -1,3 +1,3 @@
 # ./models/__init__.py
-from .sentiment import *
+from .sentiments import *
 from .user import *

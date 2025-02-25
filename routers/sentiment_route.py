@@ -4,7 +4,7 @@ from typing import List
 from functools import lru_cache
 from fastapi import FastAPI, HTTPException, APIRouter, Response, Depends
 from utils.sentiment_utils import get_sentiments, load_sentiment_labels
-from models.sentiment import SentimentRequest, SentimentResponse
+from models.sentiments import SentimentRequest, SentimentResponse
 from utils.logger import log_info, log_error, log_debug
 from utils.rate_limiter import RateLimiter, rate_limiter
 
