@@ -20,7 +20,7 @@ async def analyze_sentiment(request: SentimentRequest, label_group: str = None):
     candidate_labels = sentiment_labels.get(label_group) if label_group else sentiment_labels.get("all")
     
     if not candidate_labels:
-        log_debug("Failed to parse candidate_labels")
+        log_debug(f"Failed to parse candidate_labels: {label_group}")
         raise HTTPException(status_code=400, detail="Invalid label group. Further sentiment customization is underway.")
     try:
         log_info(f"Sentiment analysis requested for text: {request.prompts}")
