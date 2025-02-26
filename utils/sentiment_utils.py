@@ -12,19 +12,19 @@ import sys
 @lru_cache(maxsize=1)
 def load_sentiment_labels():
     try:
-        log_info("Loading sentiment labels from file...")
+        log_info(f"Initializing sentiment config json — {str(__file__)}")
         with open("sentiment_labels.json") as f:
             labels = json.load(f)
-            log_debug(f"Sentiment labels loaded successfully: {labels}")
+            log_debug(f"Sentiment labels initialized successfully — {str(__file__)} — {labels}")
             return labels
     except FileNotFoundError as e:
-        log_error(f"File not found: sentiment_labels.json — {str(e)}")
+        log_error(f"Sentiment config file not found — {str(__file__)} — {str(e)}")
         raise HTTPException(status_code=500, detail="Sentiment labels configuration file not found")
     except json.JSONDecodeError as e:
-        log_error(f"Error decoding JSON from sentiment_labels.json — {str(e)}")
+        log_error(f"Error decoding JSON from Sentiment config — {str(__file__)} — {str(e)}")
         raise HTTPException(status_code=500, detail="Error decoding sentiment labels configuration file")
     except Exception as e:
-        log_critical(f"Unexpected error loading sentiment labels — {str(e)}")
+        log_critical(f"Unexpected error loading sentiment labels — {str(__file__)} — {str(e)}")
         raise HTTPException(status_code=500, detail=f"Unexpected error loading sentiment labels: {str(e)}")
 
 
@@ -33,7 +33,7 @@ def load_sentiment_labels():
 def get_classifier():
     try:
         log_info("Initializing sentiment classifier pipeline...")
-        # classifier = pipeline("zero-shot-classification", model="bart-large-mnli") # Needs api key
+        # classifier = pipeline("zero—shot—classification", model="bart—large—mnli") # Needs api key
         classifier = pipeline("zero-shot-classification")
         if not classifier:
             log_critical("Failed to initialize classifier pipeline")

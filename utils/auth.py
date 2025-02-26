@@ -12,7 +12,6 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM  = os.getenv("ALGORITHM")
 
-
 # Simple SQLite connection
 def get_db_connection():
     conn = sqlite3.connect("users.db")

@@ -14,7 +14,6 @@ router = APIRouter(
     prefix="/v1/api"
 )
 
-
 @router.post("/sentiment/{label_group}", response_model=List[SentimentResponse])
 @router.post("/sentiment", response_model=List[SentimentResponse])
 @rate_limiter(calls=3, period=0.041667)  # 100 requests per day [hours for testing]
@@ -23,10 +22,10 @@ async def analyze_sentiment(request: SentimentRequest, label_group: str = None):
     candidate_labels = sentiment_labels.get(label_group) if label_group else sentiment_labels.get("all")
     
     if not candidate_labels:
-        log_debug(f"Failed to parse candidate_labels: {label_group}")
-        raise HTTPException(status_code=400, detail="Invalid label group. Further sentiment customization is underway.")
+        log_debug(f"User requested invalid sentiment - {label_group}")
+        raise HTTPException(status_code=400, detail="Invalid sentiment label.")
     try:
-        log_info(f"Sentiment analysis requested for text: {request.prompts}")
+        log_info(f"Sentiment analysis requested for text - {request.prompts}")
         return get_sentiments(candidate_labels, request.prompts)
     except ValueError as e:
         log_error(f"Failed to analyze sentiment: {str(e)}")
